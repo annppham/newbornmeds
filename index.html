@@ -268,5 +268,23 @@
   </div>
 
   <script src="script.js" defer></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const tabs = ['info','quiz','checklist'];
+  const btns = document.querySelectorAll('.tabbtn');
+  function show(name){
+    tabs.forEach(t=>{
+      const sec = document.getElementById('tab-'+t);
+      const btn = document.querySelector(`.tabbtn[data-tab="${t}"]`);
+      if(!sec || !btn) return;
+      if(t===name){ sec.removeAttribute('hidden'); btn.setAttribute('aria-current','page'); }
+      else { sec.setAttribute('hidden',''); btn.removeAttribute('aria-current'); }
+    });
+  }
+  btns.forEach(btn=>btn.addEventListener('click',()=>show(btn.dataset.tab)));
+  show('info'); // default
+});
+</script>
+
 </body>
 </html>
