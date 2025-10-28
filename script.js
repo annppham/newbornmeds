@@ -20,17 +20,37 @@
   }
 
   function initTabs(){
-    const tabButtons = document.querySelectorAll('.tabbtn');
-    tabButtons.forEach(btn => btn.addEventListener('click', () => {
-      const name = btn.getAttribute('data-tab');
-      // No hash updates to avoid jumping; just show the section.
-      showTab(name);
-    }));
+   document.addEventListener('DOMContentLoaded', () => {
+  const tabs = ['info','quiz','checklist'];
+  const tabButtons = document.querySelectorAll('.tabbtn');
 
-    const fromHash = (location.hash || '').replace('#','');
-    const saved = (function(){ try{return localStorage.getItem('nv-tab');}catch(e){return null;} })();
-    const start = tabs.includes(fromHash) ? fromHash : (tabs.includes(saved) ? saved : 'info');
-    showTab(start);
+  function showTab(name){
+    tabs.forEach(t => {
+      const sec = document.getElementById(`tab-${t}`);
+      const btn = document.querySelector(`.tabbtn[data-tab="${t}"]`);
+      if(!sec || !btn) return;
+      if(t === name){
+        sec.removeAttribute('hidden');
+        btn.setAttribute('aria-current','page');
+      } else {
+        sec.setAttribute('hidden','');
+        btn.removeAttribute('aria-current');
+      }
+    });
+    try { localStorage.setItem('nv-tab', name); } catch(e){}
+  }
+
+  tabButtons.forEach(btn => btn.addEventListener('click', () => {
+    const name = btn.getAttribute('data-tab');
+    showTab(name);
+  }));
+
+  const fromHash = (location.hash || '').replace('#','');
+  const saved = (function(){ try{return localStorage.getItem('nv-tab');}catch(e){return null;} })();
+  const start = tabs.includes(fromHash) ? fromHash : (tabs.includes(saved) ? saved : 'info');
+  showTab(start);
+});
+
   }
 
   // --- Quiz logic ---
