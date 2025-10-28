@@ -90,3 +90,11 @@ textarea{min-height:100px}
 footer{margin-top:28px; color:var(--muted); font-size:13px}
 code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); border-radius:6px; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* --- CSS-only tabs using :target --- */
+section[role="region"] { display: none; }
+section[role="region"].default { display: grid; }   /* shown if no hash present */
+section[role="region"]:target { display: grid; }
+
+/* Optional: visual active state using :target */
+nav .tabbtn[aria-current="page"] { background: var(--soft); }
