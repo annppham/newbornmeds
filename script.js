@@ -32,7 +32,11 @@
     const start = tabs.includes(fromHash) ? fromHash : (tabs.includes(saved) ? saved : 'info');
     showTab(start);
   }
+function getScrollOffsetPx() {
+  return window.matchMedia("(max-width: 600px)").matches ? 130 : 90;
+}
 
+  
 // --- Quiz logic (final colored answers + summary badge) ---
 function initQuiz(){
   const quizForm = document.getElementById('quiz-form');
