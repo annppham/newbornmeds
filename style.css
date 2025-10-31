@@ -193,3 +193,31 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 #list > div:last-child {
   justify-content: center;
 }
+/* --- FINAL spacing fix between quiz buttons and checklist card --- */
+
+/* Add space under the quiz button row */
+#quiz-form > div:last-child {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  margin-top: 20px;   /* space above buttons */
+  margin-bottom: 28px !important; /* space BELOW buttons before next section */
+  justify-content: flex-start; /* change to center if you liked centered */
+}
+
+/* Add space above the checklist card container */
+#tab-checklist .card {
+  margin-top: 32px !important;  /* pushes the whole checklist card down */
+}
+
+/* Add spacing inside the checklist button row itself */
+#list > div:last-child {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  margin-top: 20px;   /* space above Save/Download/Clear row inside checklist */
+  margin-bottom: 8px; /* tiny cushion before "Saved to this browser", etc. */
+  justify-content: flex-start;
+}
