@@ -289,5 +289,21 @@
         </div>
       </article>
     </section>
+ <script>
+    (function(){
+      function setCurrent(){
+        var links = document.querySelectorAll('nav .tabbtn');
+        links.forEach(function(a){ a.removeAttribute('aria-current'); });
+        var id = location.hash || '#tab-info';
+        var active = document.querySelector('nav .tabbtn[href="'+id+'"]');
+        if(active){ active.setAttribute('aria-current','page'); }
+      }
+      if(!location.hash){ location.hash = '#tab-info'; }
+      window.addEventListener('hashchange', setCurrent);
+      document.addEventListener('DOMContentLoaded', setCurrent);
+    })();
+  </script>
 
+  <script src="script.js" defer></script>
+</body>
 </html>
