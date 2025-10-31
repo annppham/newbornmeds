@@ -221,3 +221,35 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
   margin-bottom: 8px; /* tiny cushion before "Saved to this browser", etc. */
   justify-content: flex-start;
 }
+/* force visible gap between quiz and checklist */
+.section-spacer {
+  height: 32px;
+}
+
+/* quiz button row spacing and layout */
+#quiz-form > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 20px;
+  margin-bottom: 24px;
+  justify-content: flex-start;
+}
+
+/* checklist button row spacing and layout */
+.checklist-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 24px;
+  margin-bottom: 8px;
+  justify-content: flex-start;
+}
+
+/* make buttons breathe a little on mobile */
+#quiz-form .btn,
+.checklist-buttons .btn {
+  margin: 0; /* gap handles spacing now */
+}
