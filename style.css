@@ -90,3 +90,65 @@ textarea{min-height:100px}
 footer{margin-top:28px; color:var(--muted); font-size:13px}
 code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); border-radius:6px; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* footer layout */
+.app-footer {
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  border-top: 1px solid var(--stroke);
+  padding-top: 20px;
+}
+
+.footer-top {
+  margin-bottom: 16px;
+}
+
+.footer-tech {
+  margin-top: 6px;
+}
+
+.ref-card {
+  background: #ffffff;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(31,42,68,.06);
+  padding: 16px 20px;
+  background-image: radial-gradient(circle at 10% 0%, rgba(122,220,198,0.12) 0%, transparent 60%), radial-gradient(circle at 90% 0%, rgba(58,134,255,0.12) 0%, transparent 60%);
+}
+
+.ref-heading {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.ref-list-heading {
+  margin: 16px 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ref-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.ref-list li {
+  margin-bottom: 8px;
+}
+
+.smalltext {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0;
+}
+
+.tinytext {
+  font-size: 12px;
+  margin-top: 12px;
+  color: var(--muted);
+}
