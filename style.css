@@ -333,3 +333,20 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 body, .main-content {
   padding-top: 130px !important;
 }
+/* Remove the unwanted blue/gray box under quiz buttons */
+#quiz-results {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-top: 16px;
+  min-height: 0;
+}
+
+/* Optional: add subtle text style if you still want feedback to appear cleanly */
+#quiz-results div {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
