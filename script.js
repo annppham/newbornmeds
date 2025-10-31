@@ -33,50 +33,114 @@
     showTab(start);
   }
 
-  // --- Quiz logic ---
-  function initQuiz(){
-    const quizForm = document.getElementById('quiz-form');
-    const quizResults = document.getElementById('quiz-results');
-    if(!quizForm) return;
+// --- Quiz logic ---
+function initQuiz(){
+  const quizForm = document.getElementById('quiz-form');
+  const quizResults = document.getElementById('quiz-results');
+  if(!quizForm) return;
 
-    function gradeQuiz(){
-      const questions = Array.from(document.querySelectorAll('.q'));
-      let correct = 0;
-      const explanations = [];
+  function gradeQuiz(){
+    const questions = Array.from(document.querySelectorAll('.q'));
+    let correctCount = 0;
+    const explanationsSummary = [];
 
-      questions.forEach((box, i) => {
-        const answer = box.getAttribute('data-answer');
-        const name = `q${i+1}`;
-        const chosen = quizForm.querySelector(`input[name="${name}"]:checked`);
-        const exp = box.querySelector('.explanation');
-        const isCorrect = chosen && chosen.value === answer;
-        if(isCorrect) correct++;
-        if(exp) exp.hidden = false; // reveal explanations after submit
-        explanations.push({ number: i+1, status: isCorrect ? 'correct' : 'incorrect' });
+    questions.forEach((box, i) => {
+      const correctValue = box.getAttribute('data-answer'); // e.g. "a", "b", "c"
+      const name = `q${i+1}`;
+      const chosenInput = quizForm.querySelector(`input[name="${name}"]:checked`);
+      const allChoices = Array.from(box.querySelectorAll('.choices label'));
+      const explanation = box.querySelector('.explanation');
+
+      // Clear old states first
+      allChoices.forEach(label => {
+        label.classList.remove('correct-choice','wrong-choice','user-choice');
       });
 
-      const total = questions.length;
-      const pct = Math.round((correct/total)*100);
-      if(quizResults){
-        quizResults.hidden = false;
-        quizResults.innerHTML = `
-          <div><strong>Score:</strong> ${correct}/${total} (${pct}%)</div>
-          <div style="margin-top:8px">${explanations.map(e => `Q${e.number}: <span class="${e.status}">${e.status}</span>`).join(' • ')}</div>
-        `;
-        window.scrollTo({top: quizResults.getBoundingClientRect().top + window.scrollY - 120, behavior:'smooth'});
+      // Highlight correct answer
+      const correctInput = box.querySelector(`input[name="${name}"][value="${correctValue}"]`);
+      if (correctInput && correctInput.parentElement) {
+        correctInput.parentElement.classList.add('correct-choice');
       }
-    }
 
-    quizForm.addEventListener('submit', e => { e.preventDefault(); gradeQuiz(); });
-    const resetBtn = document.getElementById('resetQuiz');
-    if(resetBtn){
-      resetBtn.addEventListener('click', () => {
-        quizForm.reset();
-        document.querySelectorAll('.explanation').forEach(exp => exp.hidden = true);
-        if(quizResults){ quizResults.hidden = true; quizResults.textContent = ''; }
-      });
+      // If the user picked something
+      if (chosenInput) {
+        // Mark the user's picked choice
+        chosenInput.parentElement.classList.add('user-choice');
+
+        // Check if correct
+        const isCorrect = chosenInput.value === correctValue;
+        if (isCorrect) {
+          correctCount++;
+        } else {
+          // mark the user's choice as wrong if it's not the correct one
+          chosenInput.parentElement.classList.add('wrong-choice');
+        }
+
+        explanationsSummary.push({
+          number: i+1,
+          status: isCorrect ? 'correct' : 'incorrect'
+        });
+      } else {
+        // unanswered
+        explanationsSummary.push({
+          number: i+1,
+          status: 'no answer'
+        });
+      }
+
+      // Reveal explanation text under each question
+      if (explanation) {
+        explanation.hidden = false;
+      }
+    });
+
+    const total = questions.length;
+    const pct = Math.round((correctCount/total)*100);
+
+    // Show overall results
+    if (quizResults){
+      quizResults.hidden = false;
+      quizResults.innerHTML = `
+        <div class="score-badge"><strong>Score:</strong> ${correctCount}/${total} (${pct}%)</div>
+        <div class="per-question-status">
+          ${explanationsSummary.map(e => `Q${e.number}: ${e.status}`).join(' • ')}
+        </div>
+      `;
+      // scroll result badge into view
+      quizResults.scrollIntoView({behavior:'smooth', block:'center'});
     }
   }
+
+  quizForm.addEventListener('submit', e => {
+    e.preventDefault();
+    gradeQuiz();
+  });
+
+  const resetBtn = document.getElementById('resetQuiz');
+  if(resetBtn){
+    resetBtn.addEventListener('click', () => {
+      // clear form
+      quizForm.reset();
+
+      // hide all explanations
+      document.querySelectorAll('.explanation').forEach(exp => {
+        exp.hidden = true;
+      });
+
+      // clear all highlight classes
+      document.querySelectorAll('.choices label').forEach(label => {
+        label.classList.remove('correct-choice','wrong-choice','user-choice');
+      });
+
+      // hide results box
+      if (quizResults){
+        quizResults.hidden = true;
+        quizResults.innerHTML = '';
+      }
+    });
+  }
+}
+
 
   // --- Checklist persistence ---
   function initChecklist(){
