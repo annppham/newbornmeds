@@ -317,3 +317,19 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 .main-content {
   padding-top: 120px;  /* adjust if header looks too far or too close */
 }
+/* ==== FIXED HEADER GUARANTEED ==== */
+.site-header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 12px 0;
+}
+
+/* ensure content starts below fixed header */
+body, .main-content {
+  padding-top: 130px !important;
+}
