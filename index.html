@@ -315,11 +315,7 @@
       }
     }
 
-    // IMPORTANT CHANGE:
-    // We do NOT force location.hash on first load anymore.
-    // So no "location.hash = '#tab-info'" line.
-
-    window.addEventListener('hashchange', setCurrent);
+      window.addEventListener('hashchange', setCurrent);
     document.addEventListener('DOMContentLoaded', setCurrent);
   })();
 </script>
