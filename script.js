@@ -33,7 +33,7 @@
     showTab(start);
   }
 
-// --- Quiz logic ---
+// --- Quiz logic (final colored answers + summary badge) ---
 function initQuiz(){
   const quizForm = document.getElementById('quiz-form');
   const quizResults = document.getElementById('quiz-results');
@@ -45,34 +45,33 @@ function initQuiz(){
     const explanationsSummary = [];
 
     questions.forEach((box, i) => {
-      const correctValue = box.getAttribute('data-answer'); // e.g. "a", "b", "c"
-      const name = `q${i+1}`;
-      const chosenInput = quizForm.querySelector(`input[name="${name}"]:checked`);
+      const correctValue = box.getAttribute('data-answer'); // "a", "b", "c"
+      const qName = `q${i+1}`;
+
+      const chosenInput = quizForm.querySelector(`input[name="${qName}"]:checked`);
+      const correctInput = quizForm.querySelector(`input[name="${qName}"][value="${correctValue}"]`);
       const allChoices = Array.from(box.querySelectorAll('.choices label'));
       const explanation = box.querySelector('.explanation');
 
-      // Clear old states first
+      // 1. clear any old styles first
       allChoices.forEach(label => {
         label.classList.remove('correct-choice','wrong-choice','user-choice');
       });
 
-      // Highlight correct answer
-      const correctInput = box.querySelector(`input[name="${name}"][value="${correctValue}"]`);
+      // 2. always highlight the correct answer in green
       if (correctInput && correctInput.parentElement) {
         correctInput.parentElement.classList.add('correct-choice');
       }
 
-      // If the user picked something
+      // 3. if user picked something
       if (chosenInput) {
-        // Mark the user's picked choice
         chosenInput.parentElement.classList.add('user-choice');
 
-        // Check if correct
         const isCorrect = chosenInput.value === correctValue;
         if (isCorrect) {
           correctCount++;
         } else {
-          // mark the user's choice as wrong if it's not the correct one
+          // mark only the user's wrong pick in red
           chosenInput.parentElement.classList.add('wrong-choice');
         }
 
@@ -88,16 +87,16 @@ function initQuiz(){
         });
       }
 
-      // Reveal explanation text under each question
+      // 4. reveal each question's explanation text
       if (explanation) {
         explanation.hidden = false;
       }
     });
 
     const total = questions.length;
-    const pct = Math.round((correctCount/total)*100);
+    const pct = Math.round((correctCount / total) * 100);
 
-    // Show overall results
+    // 5. render the summary result at the bottom of the quiz
     if (quizResults){
       quizResults.hidden = false;
       quizResults.innerHTML = `
@@ -106,33 +105,34 @@ function initQuiz(){
           ${explanationsSummary.map(e => `Q${e.number}: ${e.status}`).join(' • ')}
         </div>
       `;
-      // scroll result badge into view
+      // optional scroll:
       quizResults.scrollIntoView({behavior:'smooth', block:'center'});
     }
   }
 
+  // submit button
   quizForm.addEventListener('submit', e => {
     e.preventDefault();
     gradeQuiz();
   });
 
+  // reset button
   const resetBtn = document.getElementById('resetQuiz');
-  if(resetBtn){
+  if (resetBtn){
     resetBtn.addEventListener('click', () => {
-      // clear form
       quizForm.reset();
 
-      // hide all explanations
+      // hide explanations again
       document.querySelectorAll('.explanation').forEach(exp => {
         exp.hidden = true;
       });
 
-      // clear all highlight classes
+      // remove highlight colors from all questions
       document.querySelectorAll('.choices label').forEach(label => {
         label.classList.remove('correct-choice','wrong-choice','user-choice');
       });
 
-      // hide results box
+      // clear summary box
       if (quizResults){
         quizResults.hidden = true;
         quizResults.innerHTML = '';
@@ -140,7 +140,6 @@ function initQuiz(){
     });
   }
 }
-
 
   // --- Checklist persistence ---
   function initChecklist(){
