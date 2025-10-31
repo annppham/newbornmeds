@@ -273,10 +273,29 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 }
 
 /* we’re wrapping the existing header contents so they lay out nicely inside the sticky bar */
+/* --- STICKY HEADER (FINAL) --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #eef6ff 0%, transparent 60%),
+    radial-gradient(1000px 500px at 90% 0%, #fff0f0 0%, transparent 55%),
+    var(--bg);
+
+  border-bottom: 1px solid var(--stroke);
+  box-shadow: 0 8px 20px rgba(31,42,68,.07);
+
+  /* give it its own padding so it looks like a bar */
+  padding-top: 16px;
+  padding-bottom: 12px;
+}
+
 .site-header-inner {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 0 16px;
 
   display: flex;
   flex-wrap: wrap;
@@ -285,14 +304,7 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
   justify-content: space-between;
 }
 
-/* brand block still looks the same */
-.site-header-inner .brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* nav tabs: tighten spacing a little so they look like a navbar */
+/* nav buttons stay on one line when possible */
 .site-header-inner nav {
   display: flex;
   flex-wrap: wrap;
@@ -309,8 +321,10 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
   cursor:pointer;
   text-decoration:none;
   font-size:15px;
+  line-height:1.2;
   transition:.2s transform,.2s background,.2s box-shadow,.2s border-color;
 }
+
 .site-header-inner .tabbtn[aria-current="page"],
 .site-header-inner .tabbtn:hover{
   background:var(--soft);
@@ -318,14 +332,9 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
   box-shadow:var(--ring);
 }
 
-/* push the page content down so it doesn't hide under the sticky header */
+/* make sure page content doesn't run under the sticky header visually */
 .main-content {
-  padding-top: 12px; /* slight breathing room under sticky bar */
+  padding-top: 12px;
 }
-/* keep the page from jumping under the header when landing on an anchor like #tab-info */
-section[role="region"] {
-  scroll-margin-top: 140px; /* make this a little bigger than your header height */
-}
-section[role="region"] {
-  scroll-margin-top: 140px;
+
 }
