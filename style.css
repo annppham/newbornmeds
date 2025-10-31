@@ -326,3 +326,6 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 section[role="region"] {
   scroll-margin-top: 140px; /* make this a little bigger than your header height */
 }
+section[role="region"] {
+  scroll-margin-top: 140px;
+}
