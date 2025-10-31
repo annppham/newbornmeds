@@ -377,5 +377,70 @@
   </script>
 
   <script src="script.js" defer></script>
+<script>
+(function(){
+  // how much space we want between the fixed header and the section when we scroll there
+  function getScrollOffsetPx() {
+    // desktop vs mobile? mirror the CSS values
+    return window.matchMedia("(max-width: 600px)").matches ? 110 : 90;
+  }
+
+  // smooth-scroll to a section ID with our custom offset
+  function scrollToSection(id) {
+    const section = document.querySelector(id);
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+    const absoluteTop = rect.top + window.scrollY;
+    const offsetTop = absoluteTop - getScrollOffsetPx();
+
+    window.scrollTo({
+      top: offsetTop,
+      behavior: "smooth"
+    });
+  }
+
+  // update aria-current on the active tab
+  function markActiveTab(id){
+    document.querySelectorAll('.tabbtn').forEach(btn => {
+      const href = btn.getAttribute('href');
+      if (href === id) {
+        btn.setAttribute('aria-current','page');
+      } else {
+        btn.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  // attach click handlers to header nav links
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.tabbtn[href^="#tab-"]').forEach(btn => {
+      btn.addEventListener('click', function(evt){
+        evt.preventDefault();
+        const targetId = this.getAttribute('href'); // like "#tab-quiz"
+
+        // show that section (if you are hiding/showing with classes,
+        // you could toggle .active here — but if you're letting all sections stack,
+        // you can skip this part)
+        // Example if you're using .active display logic:
+        //   document.querySelectorAll('section[role="region"]').forEach(sec => {
+        //     if ('#'+sec.id === targetId) {
+        //       sec.classList.add('active');
+        //     } else {
+        //       sec.classList.remove('active');
+        //     }
+        //   });
+
+        markActiveTab(targetId);
+        scrollToSection(targetId);
+
+        // also update the URL hash so refresh/bookmark still works
+        history.replaceState(null, "", targetId);
+      });
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
