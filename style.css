@@ -350,3 +350,64 @@ body, .main-content {
   padding: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
+/* --- CLEAN UP THE AREA UNDER QUIZ BUTTONS --- */
+
+/* The new wrapper around the buttons + results */
+.quiz-controls {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 16px 0 0 0;      /* gentle space above results area */
+  margin-top: 16px;
+  border-radius: 0 !important;
+}
+
+/* Force-kill any inherited "blue card" look */
+.quiz-controls,
+.quiz-controls * {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* BUT make the buttons still look like buttons */
+.quiz-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+/* Let the result text (score) show up nicely after submit */
+#quiz-results {
+  background: transparent !important;
+  padding: 0 !important;
+  margin-top: 4px;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Optional: make the score itself look like a subtle badge instead of a giant bar */
+#quiz-results div:first-child {
+  display: inline-block;
+  background: #fff !important;
+  border: 1px solid var(--stroke) !important;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(31,42,68,.07) !important;
+  margin-bottom: 8px;
+}
+
+/* The "Q1: correct • Q2: incorrect..." line */
+#quiz-results div:nth-child(2) {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-size: 0.9rem;
+}
