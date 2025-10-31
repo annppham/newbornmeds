@@ -8,20 +8,29 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <header>
+  <!-- sticky header bar -->
+  <header class="site-header">
+    <div class="site-header-inner">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div>
           <h1>Newborn Medications & Vaccinations</h1>
-          <div class="muted" style="font-size:13px">Patient teaching • Hep B • Vitamin K • Erythromycin ointment</div>
+          <div class="muted" style="font-size:13px">
+            Patient teaching • Hep B • Vitamin K • Erythromycin ointment
+          </div>
         </div>
       </div>
+
       <nav aria-label="Primary">
         <a class="tabbtn" href="#tab-info" aria-current="page">Information</a>
         <a class="tabbtn" href="#tab-quiz">Quiz</a>
         <a class="tabbtn" href="#tab-checklist">Checklist</a>
       </nav>
+    </div>
+  
+  <!-- main content area that scrolls under the sticky header -->
+  <div class="wrap main-content">
+
     </header>
 
     <!-- INFO PAGE -->
