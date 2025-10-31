@@ -162,3 +162,14 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 #list .btn {
   margin-top: 8px; /* adds vertical space between button rows */
 }
+/* --- Fix tight button spacing --- */
+#quiz-form .btn,
+#list .btn {
+  display: inline-block;
+  margin: 8px 10px 8px 0 !important; /* top right bottom left */
+}
+
+#quiz-form div:last-child,
+#list div:last-child {
+  margin-top: 10px; /* add space between buttons and next element */
+}
