@@ -561,3 +561,13 @@ body,
   font-size: 0.9rem;
   color: var(--text);
 }
+/* ensure when you navigate to a section, it stops below the fixed header */
+section[role="region"] {
+  scroll-margin-top: 90px;
+}
+
+@media (max-width: 600px) {
+  section[role="region"] {
+    scroll-margin-top: 110px;
+  }
+}
