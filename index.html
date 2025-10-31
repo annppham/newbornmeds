@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <!-- sticky header bar -->
   <header class="site-header">
     <div class="site-header-inner">
@@ -27,11 +28,10 @@
         <a class="tabbtn" href="#tab-checklist">Checklist</a>
       </nav>
     </div>
-  
-  <!-- main content area that scrolls under the sticky header -->
-  <div class="wrap main-content">
+  </header>
 
-    </header>
+  <!-- main scrollable content -->
+  <div class="wrap main-content">
 
     <!-- INFO PAGE -->
     <section id="tab-info" role="region" aria-labelledby="info" class="grid default">
@@ -153,6 +153,7 @@
       <article class="card">
         <h2>Quick Knowledge Check</h2>
         <p class="muted">Select the best answer for each question, then submit to see your score and explanations.</p>
+
         <form id="quiz-form" class="quiz" novalidate>
 
           <div class="q" data-answer="a">
@@ -215,19 +216,26 @@
             <div class="explanation muted" hidden>It is routinely applied once to each eye shortly after birth.</div>
           </div>
 
-          <div>
+          <div class="quiz-buttons">
             <button type="submit" class="btn" id="submitQuiz">Submit quiz</button>
-            <button type="button" class="btn" id="resetQuiz" style="margin-left:8px">Reset</button>
+            <button type="button" class="btn" id="resetQuiz">Reset</button>
           </div>
+
+          <div id="quiz-results" class="results" hidden aria-live="polite"></div>
         </form>
       </article>
     </section>
-       <div class="section-spacer"></div>
-            <!-- CHECKLIST PAGE -->
+
+    <!-- spacer so checklist card never hugs the quiz buttons -->
+    <div class="section-spacer"></div>
+
+    <!-- CHECKLIST PAGE -->
     <section id="tab-checklist" role="region" aria-labelledby="checklist" class="grid">
       <article class="card">
         <h2>Discussion & Care Checklist</h2>
-        <p class="muted">Record what you discussed and decided with your care team. Data is stored on this browser only.</p>
+        <p class="muted">
+          Record what you discussed and decided with your care team. Data is stored on this browser only.
+        </p>
 
         <div class="checklist" id="list">
           <div class="checkrow">
@@ -284,10 +292,10 @@
             ></textarea>
           </div>
 
-          <div>
+          <div class="checklist-buttons">
             <button class="btn" id="saveChecklist">Save</button>
-            <button class="btn" id="downloadChecklist" style="margin-left:8px">Download summary</button>
-            <button class="btn" id="clearChecklist" style="margin-left:8px">Clear</button>
+            <button class="btn" id="downloadChecklist">Download summary</button>
+            <button class="btn" id="clearChecklist">Clear</button>
           </div>
 
           <div
@@ -301,65 +309,76 @@
       </article>
     </section>
 
-    <script>
-  (function(){
-    function setCurrent(){
-      var links = document.querySelectorAll('nav .tabbtn');
-      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+    <!-- REFERENCES / FOOTER -->
+    <footer class="app-footer">
+      <div class="footer-top">
+        <div>Educational content only. Always follow guidance from your healthcare professionals.</div>
+        <div class="footer-tech">
+          Built with vanilla HTML, CSS, and JavaScript.
+          Keyboard tip: use <code class="kbd">Tab</code> to navigate and
+          <code class="kbd">Space</code> to toggle choices.
+        </div>
+      </div>
 
-      // figure out which tab should be highlighted
-      var id = location.hash || '#tab-info';
-      var active = document.querySelector('nav .tabbtn[href="'+id+'"]');
-      if (active) {
-        active.setAttribute('aria-current','page');
+      <div class="ref-card">
+        <h3 class="ref-heading">Authorship & References</h3>
+
+        <p class="muted smalltext">
+          Patient education app created by <strong>Phuong-Anh Pham</strong>,
+          Patricia A. Chin School of Nursing, California State University, Los Angeles.
+          Educational purpose only. Not a substitute for individualized medical advice.
+        </p>
+
+        <h4 class="ref-list-heading">References</h4>
+        <ol class="ref-list">
+          <li>
+            Centers for Disease Control and Prevention. (2024).
+            <em>Birth dose of hepatitis B vaccine: Guidelines and rationale</em>.
+            U.S. Department of Health and Human Services.
+          </li>
+          <li>
+            American Academy of Pediatrics. (2023).
+            <em>Vitamin K and prevention of vitamin K deficiency bleeding in newborns</em>.
+            AAP Committee on Fetus and Newborn.
+          </li>
+          <li>
+            Centers for Disease Control and Prevention. (2024).
+            <em>Ophthalmic prophylaxis for prevention of neonatal gonococcal ophthalmia</em>.
+            U.S. Department of Health and Human Services.
+          </li>
+        </ol>
+
+        <p class="muted tinytext">
+          Content adapted from CDC and AAP guidance to explain common newborn preventive treatments:
+          hepatitis B vaccine, vitamin K injection, and erythromycin eye ointment.
+        </p>
+      </div>
+    </footer>
+
+  </div><!-- end .wrap.main-content -->
+
+  <!-- highlight active tab in header, without forcing a hash on first load -->
+  <script>
+    (function(){
+      function setCurrent(){
+        var links = document.querySelectorAll('nav .tabbtn');
+        links.forEach(function(a){
+          a.removeAttribute('aria-current');
+        });
+
+        // if no hash, treat #tab-info as active ONLY for styling
+        var id = location.hash || '#tab-info';
+        var active = document.querySelector('nav .tabbtn[href="'+id+'"]');
+        if (active) {
+          active.setAttribute('aria-current','page');
+        }
       }
-    }
 
       window.addEventListener('hashchange', setCurrent);
-    document.addEventListener('DOMContentLoaded', setCurrent);
-  })();
-</script>
-
+      document.addEventListener('DOMContentLoaded', setCurrent);
+    })();
+  </script>
 
   <script src="script.js" defer></script>
 </body>
-
-        <footer class="app-footer">
-  <div class="footer-top">
-    <div>Educational content only. Always follow guidance from your healthcare professionals.</div>
-    <div class="footer-tech">
-      Built with vanilla HTML, CSS, and JavaScript.
-      Keyboard tip: use <code class="kbd">Tab</code> to navigate and <code class="kbd">Space</code> to toggle choices.
-    </div>
-  </div>
-
-  <div class="ref-card">
-    <h3 class="ref-heading">Authorship & References</h3>
-
-    <p class="muted smalltext">
-      Patient education app created by <strong>Phuong-Anh Pham</strong>, Patricia A. Chin School of Nursing,
-      California State University, Los Angeles.
-      Educational purpose only. Not a substitute for individualized medical advice.
-    </p>
-
-    <h4 class="ref-list-heading">References</h4>
-    <ol class="ref-list">
-      <li>
-        Centers for Disease Control and Prevention. (2024). <em>Birth dose of hepatitis B vaccine: Guidelines and rationale</em>. U.S. Department of Health and Human Services.
-      </li>
-      <li>
-        American Academy of Pediatrics. (2023). <em>Vitamin K and prevention of vitamin K deficiency bleeding in newborns</em>. AAP Committee on Fetus and Newborn.
-      </li>
-      <li>
-        Centers for Disease Control and Prevention. (2024). <em>Ophthalmic prophylaxis for prevention of neonatal gonococcal ophthalmia</em>. U.S. Department of Health and Human Services.
-      </li>
-    </ol>
-
-    <p class="muted tinytext">
-      Content adapted from CDC and AAP guidance to explain common newborn preventive treatments:
-      hepatitis B vaccine, vitamin K injection, and erythromycin eye ointment.
-    </p>
-  </div>
-</footer>
-
 </html>
