@@ -211,4 +211,83 @@
             <button type="button" class="btn" id="resetQuiz" style="margin-left:8px">Reset</button>
           </div>
         </form>
+
+            <!-- CHECKLIST PAGE -->
+    <section id="tab-checklist" role="region" aria-labelledby="checklist" class="grid">
+      <article class="card">
+        <h2>Discussion & Care Checklist</h2>
+        <p class="muted">Record what you discussed and decided with your care team. Data is stored on this browser only.</p>
+
+        <div class="checklist" id="list">
+          <div class="checkrow">
+            <label>
+              <input type="checkbox" data-key="infoReviewed">
+              Parent(s) received information about HepB, Vitamin K, and Erythromycin
+            </label>
+          </div>
+
+          <div class="checkrow">
+            <label>
+              <input type="checkbox" data-key="questionsAnswered">
+              Questions were asked and answered
+            </label>
+          </div>
+
+          <div class="checkrow">
+            <label>
+              <input type="checkbox" data-key="consentDocumented">
+              Consent/declination documented per hospital policy
+            </label>
+          </div>
+
+          <div class="checkrow">
+            <label>
+              <input type="checkbox" data-key="hepbGiven">
+              Hepatitis B vaccine given
+            </label>
+            <input type="datetime-local" aria-label="HepB date/time" data-key="hepbDateTime" />
+          </div>
+
+          <div class="checkrow">
+            <label>
+              <input type="checkbox" data-key="vitkGiven">
+              Vitamin K injection given
+            </label>
+            <input type="datetime-local" aria-label="Vitamin K date/time" data-key="vitkDateTime" />
+          </div>
+
+          <div class="checkrow">
+            <label>
+              <input type="checkbox" data-key="eryGiven">
+              Erythromycin eye ointment applied
+            </label>
+            <input type="datetime-local" aria-label="Erythromycin date/time" data-key="eryDateTime" />
+          </div>
+
+          <div class="checkrow" style="flex-direction:column; align-items:stretch">
+            <label for="notes">Notes</label>
+            <textarea
+              id="notes"
+              placeholder="Add any instructions or follow-ups…"
+              data-key="notes"
+            ></textarea>
+          </div>
+
+          <div>
+            <button class="btn" id="saveChecklist">Save</button>
+            <button class="btn" id="downloadChecklist" style="margin-left:8px">Download summary</button>
+            <button class="btn" id="clearChecklist" style="margin-left:8px">Clear</button>
+          </div>
+
+          <div
+            id="saveStatus"
+            class="muted"
+            role="status"
+            aria-live="polite"
+            style="margin-top:8px"
+          ></div>
+        </div>
+      </article>
+    </section>
+
 </html>
