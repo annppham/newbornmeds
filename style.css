@@ -313,10 +313,20 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
   border-color:#d6def0;
   box-shadow:var(--ring);
 }
-/* push page content down below the fixed header */
+/* default = laptop / desktop */
+body,
 .main-content {
-  padding-top: 70px;  /* adjust if header looks too far or too close */
+  padding-top: 60px; /* tune this for laptop comfort */
 }
+
+/* small screens get a little more top padding so content doesn't hide under header */
+@media (max-width: 600px) {
+  body,
+  .main-content {
+    padding-top: 80px;
+  }
+}
+
 /* ==== FIXED HEADER GUARANTEED ==== */
 .site-header {
   position: fixed !important;
@@ -330,9 +340,6 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 }
 
 /* ensure content starts below fixed header */
-body, .main-content {
-  padding-top: 70px !important;
-}
 /* Remove the unwanted blue/gray box under quiz buttons */
 #quiz-results {
   background: none !important;
