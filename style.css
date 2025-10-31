@@ -173,3 +173,23 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 #list div:last-child {
   margin-top: 10px; /* add space between buttons and next element */
 }
+/* --- Fix button spacing for Quiz and Checklist --- */
+#quiz-form > div:last-child {
+  margin-top: 20px;        /* adds more vertical space above buttons */
+  display: flex;
+  gap: 12px;               /* space between Submit and Reset buttons */
+  flex-wrap: wrap;
+}
+
+#list > div:last-child {
+  margin-top: 20px;        /* space above checklist buttons */
+  display: flex;
+  gap: 12px;               /* consistent horizontal spacing between buttons */
+  flex-wrap: wrap;
+}
+
+/* Optional: make button row centered (looks balanced) */
+#quiz-form > div:last-child,
+#list > div:last-child {
+  justify-content: center;
+}
