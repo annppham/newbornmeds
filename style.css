@@ -253,3 +253,72 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 .checklist-buttons .btn {
   margin: 0; /* gap handles spacing now */
 }
+/* --- Sticky header bar --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #eef6ff 0%, transparent 60%),
+    radial-gradient(1000px 500px at 90% 0%, #fff0f0 0%, transparent 55%),
+    var(--bg);
+
+  /* subtle bottom border + glow so it feels like a real app bar */
+  border-bottom: 1px solid var(--stroke);
+  box-shadow: 0 8px 20px rgba(31,42,68,.07);
+  padding-top: 16px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+/* we’re wrapping the existing header contents so they lay out nicely inside the sticky bar */
+.site-header-inner {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 28px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* brand block still looks the same */
+.site-header-inner .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* nav tabs: tighten spacing a little so they look like a navbar */
+.site-header-inner nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.site-header-inner .tabbtn {
+  background:#ffffff;
+  color:var(--text);
+  border:1px solid var(--stroke);
+  padding:10px 14px;
+  border-radius:12px;
+  cursor:pointer;
+  text-decoration:none;
+  font-size:15px;
+  transition:.2s transform,.2s background,.2s box-shadow,.2s border-color;
+}
+.site-header-inner .tabbtn[aria-current="page"],
+.site-header-inner .tabbtn:hover{
+  background:var(--soft);
+  border-color:#d6def0;
+  box-shadow:var(--ring);
+}
+
+/* push the page content down so it doesn't hide under the sticky header */
+.main-content {
+  padding-top: 12px; /* slight breathing room under sticky bar */
+}
