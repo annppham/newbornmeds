@@ -379,20 +379,17 @@
   <script src="script.js" defer></script>
 <script>
 (function(){
-  // how much space we want between the fixed header and the section when we scroll there
+  // Calculate how far below the fixed header to scroll
   function getScrollOffsetPx() {
-    // desktop vs mobile? mirror the CSS values
-    return window.matchMedia("(max-width: 600px)").matches ? 110 : 90;
+    return window.matchMedia("(max-width: 600px)").matches ? 130 : 90;
   }
 
-  // smooth-scroll to a section ID with our custom offset
   function scrollToSection(id) {
-    const section = document.querySelector(id);
-    if (!section) return;
+    const target = document.querySelector(id);
+    if (!target) return;
 
-    const rect = section.getBoundingClientRect();
-    const absoluteTop = rect.top + window.scrollY;
-    const offsetTop = absoluteTop - getScrollOffsetPx();
+    const rect = target.getBoundingClientRect();
+    const offsetTop = rect.top + window.scrollY - getScrollOffsetPx();
 
     window.scrollTo({
       top: offsetTop,
@@ -400,42 +397,24 @@
     });
   }
 
-  // update aria-current on the active tab
+  // Highlight the current tab
   function markActiveTab(id){
     document.querySelectorAll('.tabbtn').forEach(btn => {
       const href = btn.getAttribute('href');
-      if (href === id) {
-        btn.setAttribute('aria-current','page');
-      } else {
-        btn.removeAttribute('aria-current');
-      }
+      if (href === id) btn.setAttribute('aria-current','page');
+      else btn.removeAttribute('aria-current');
     });
   }
 
-  // attach click handlers to header nav links
+  // Intercept tab clicks and scroll smoothly with offset
   document.addEventListener('DOMContentLoaded', function(){
     document.querySelectorAll('.tabbtn[href^="#tab-"]').forEach(btn => {
       btn.addEventListener('click', function(evt){
         evt.preventDefault();
-        const targetId = this.getAttribute('href'); // like "#tab-quiz"
-
-        // show that section (if you are hiding/showing with classes,
-        // you could toggle .active here — but if you're letting all sections stack,
-        // you can skip this part)
-        // Example if you're using .active display logic:
-        //   document.querySelectorAll('section[role="region"]').forEach(sec => {
-        //     if ('#'+sec.id === targetId) {
-        //       sec.classList.add('active');
-        //     } else {
-        //       sec.classList.remove('active');
-        //     }
-        //   });
-
-        markActiveTab(targetId);
-        scrollToSection(targetId);
-
-        // also update the URL hash so refresh/bookmark still works
-        history.replaceState(null, "", targetId);
+        const id = this.getAttribute('href');
+        markActiveTab(id);
+        scrollToSection(id);
+        history.replaceState(null, "", id);
       });
     });
   });
