@@ -253,30 +253,13 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 .checklist-buttons .btn {
   margin: 0; /* gap handles spacing now */
 }
-/* --- Sticky header bar --- */
+/* ===== FIXED HEADER FINAL ===== */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  right: 0;
 
-  background:
-    radial-gradient(1200px 600px at 10% -10%, #eef6ff 0%, transparent 60%),
-    radial-gradient(1000px 500px at 90% 0%, #fff0f0 0%, transparent 55%),
-    var(--bg);
-
-  /* subtle bottom border + glow so it feels like a real app bar */
-  border-bottom: 1px solid var(--stroke);
-  box-shadow: 0 8px 20px rgba(31,42,68,.07);
-  padding-top: 16px;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-}
-
-/* we’re wrapping the existing header contents so they lay out nicely inside the sticky bar */
-/* --- STICKY HEADER (FINAL) --- */
-.site-header {
-  position: sticky;
-  top: 0;
   z-index: 1000;
 
   background:
@@ -287,11 +270,11 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
   border-bottom: 1px solid var(--stroke);
   box-shadow: 0 8px 20px rgba(31,42,68,.07);
 
-  /* give it its own padding so it looks like a bar */
   padding-top: 16px;
   padding-bottom: 12px;
 }
 
+/* same as before */
 .site-header-inner {
   max-width: 1024px;
   margin: 0 auto;
@@ -304,7 +287,6 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
   justify-content: space-between;
 }
 
-/* nav buttons stay on one line when possible */
 .site-header-inner nav {
   display: flex;
   flex-wrap: wrap;
@@ -326,13 +308,8 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 }
 
 .site-header-inner .tabbtn[aria-current="page"],
-.site-header-inner .tabbtn:hover{
+.site-header-inner .tabbtn:hover {
   background:var(--soft);
   border-color:#d6def0;
   box-shadow:var(--ring);
-}
-
-/* make sure page content doesn't run under the sticky header visually */
-.main-content {
-  padding-top: 12px;
 }
