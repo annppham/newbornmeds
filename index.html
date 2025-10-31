@@ -291,20 +291,30 @@
         </div>
       </article>
     </section>
- <script>
-    (function(){
-      function setCurrent(){
-        var links = document.querySelectorAll('nav .tabbtn');
-        links.forEach(function(a){ a.removeAttribute('aria-current'); });
-        var id = location.hash || '#tab-info';
-        var active = document.querySelector('nav .tabbtn[href="'+id+'"]');
-        if(active){ active.setAttribute('aria-current','page'); }
+
+    <script>
+  (function(){
+    function setCurrent(){
+      var links = document.querySelectorAll('nav .tabbtn');
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+
+      // figure out which tab should be highlighted
+      var id = location.hash || '#tab-info';
+      var active = document.querySelector('nav .tabbtn[href="'+id+'"]');
+      if (active) {
+        active.setAttribute('aria-current','page');
       }
-      if(!location.hash){ location.hash = '#tab-info'; }
-      window.addEventListener('hashchange', setCurrent);
-      document.addEventListener('DOMContentLoaded', setCurrent);
-    })();
-  </script>
+    }
+
+    // IMPORTANT CHANGE:
+    // We do NOT force location.hash on first load anymore.
+    // So no "location.hash = '#tab-info'" line.
+
+    window.addEventListener('hashchange', setCurrent);
+    document.addEventListener('DOMContentLoaded', setCurrent);
+  })();
+</script>
+
 
   <script src="script.js" defer></script>
 </body>
