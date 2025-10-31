@@ -322,3 +322,7 @@ code.kbd{padding:.2em .5em; background:#f5f7ff; border:1px solid var(--stroke); 
 .main-content {
   padding-top: 12px; /* slight breathing room under sticky bar */
 }
+/* keep the page from jumping under the header when landing on an anchor like #tab-info */
+section[role="region"] {
+  scroll-margin-top: 140px; /* make this a little bigger than your header height */
+}
