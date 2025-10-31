@@ -367,8 +367,7 @@
         });
 
         // if no hash, treat #tab-info as active ONLY for styling
-        var id = location.hash || '#tab-info';
-        var active = document.querySelector('nav .tabbtn[href="'+id+'"]');
+                var active = document.querySelector('nav .tabbtn[href="'+id+'"]');
         if (active) {
           active.setAttribute('aria-current','page');
         }
