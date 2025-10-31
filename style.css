@@ -475,3 +475,82 @@ body, .main-content {
   font-size: 0.9rem;
   color: var(--text);
 }
+/* ===== QUIZ VISUAL FEEDBACK ===== */
+
+/* base look for answer choices */
+.choices label {
+  display: block;
+  background: #f9faff;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(31,42,68,.04);
+  transition: background .15s, border-color .15s, box-shadow .15s;
+}
+
+/* highlight the correct answer (green) */
+.correct-choice {
+  border-color: #4caf50 !important;
+  background: #edf9ef !important;
+  box-shadow: 0 0 0 3px rgba(76,175,80,.15) !important;
+}
+
+/* highlight the user's wrong picked answer (red) */
+.wrong-choice.user-choice {
+  border-color: #f44336 !important;
+  background: #fff0f0 !important;
+  box-shadow: 0 0 0 3px rgba(244,67,54,.15) !important;
+}
+
+/* if the user chose the correct one, keep it green (doesn't turn red) */
+.correct-choice.user-choice {
+  border-color: #4caf50 !important;
+  background: #edf9ef !important;
+  box-shadow: 0 0 0 3px rgba(76,175,80,.15) !important;
+}
+
+/* explanation paragraph under each question */
+.explanation {
+  font-size: 0.9rem;
+  background: #ffffff;
+  border-left: 3px solid var(--stroke);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(31,42,68,.05);
+  padding: 10px 12px;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+/* results summary that appears at the bottom of the quiz */
+#quiz-results {
+  margin-top: 20px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* badge with overall score */
+#quiz-results .score-badge {
+  display: inline-block;
+  background: #ffffff;
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(31,42,68,.07),
+              0 2px 4px rgba(31,42,68,.05);
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* line that says "Q1: correct • Q2: incorrect..." */
+#quiz-results .per-question-status {
+  font-size: 0.9rem;
+  color: var(--text);
+}
